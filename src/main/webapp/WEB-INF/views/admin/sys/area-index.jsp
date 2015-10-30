@@ -4,7 +4,6 @@
 <html>
 <head>
   <title>测试系统</title>
-
 </head>
 <body>
 <table id="grid-sys-area-index"></table>
