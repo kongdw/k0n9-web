@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+	<mapping path="/w" decorator="/WEB-INF/views/layouts/www.jsp" />
+	<mapping path="/w/*" decorator="/WEB-INF/views/layouts/www.jsp" />
+
+    <mapping path="/a/password/reset" decorator="/WEB-INF/views/layouts/admin-login.jsp" />
+    <mapping path="/a/login" decorator="/WEB-INF/views/layouts/admin-login.jsp" />
+	<mapping path="/a" decorator="/WEB-INF/views/layouts/admin-index.jsp" />
+    <mapping path="/a/*" decorator="/WEB-INF/views/layouts/admin-index.jsp" />
+    <mapping path="*" exclue="true" />
+    <mapping path="/w/mock/*" exclue="true" />
+</sitemesh>
