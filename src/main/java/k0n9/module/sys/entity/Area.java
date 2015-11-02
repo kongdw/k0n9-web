@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
  * @author David Kong
  * @version 1.0
  */
-public class Area extends TreeEntity<Area> {
+public class Area extends TreeEntity<Area,Long> {
 
     private static final long serialVersionUID = 9189172673036252551L;
 

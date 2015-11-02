@@ -48,8 +48,12 @@
 	<!--</typeAliases>-->
 	
 	<!-- 插件配置 -->
-	<!--<plugins>-->
-		<!--<plugin interceptor="com.thinkgem.jeesite.common.persistence.interceptor.PaginationInterceptor" />-->
-    <!--</plugins>-->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+            <property name="pageSizeZero" value="true"/>
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
 	
 </configuration>

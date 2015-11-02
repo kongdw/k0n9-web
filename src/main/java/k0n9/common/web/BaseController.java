@@ -1,12 +1,11 @@
 package k0n9.common.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import k0n9.common.entity.PersistableEntity;
+import k0n9.common.entity.BaseEntity;
 import k0n9.common.service.BaseService;
 import k0n9.common.web.view.OperationResult;
 import org.apache.commons.lang3.BooleanUtils;
@@ -27,7 +26,7 @@ import java.util.Set;
  * @author David Kong
  * @version 1.0
  */
-public abstract class BaseController<T extends PersistableEntity<ID>, ID extends Serializable> {
+public abstract class BaseController<T extends BaseEntity<ID>, ID extends Serializable> {
 
     private final static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
@@ -44,6 +43,9 @@ public abstract class BaseController<T extends PersistableEntity<ID>, ID extends
         return new PageInfo<T>(list);
     }
 
+    protected List<T> findList(T entity){
+        return getEntityService().findList(entity);
+    }
     protected OperationResult editSave(T entity) {
         getEntityService().save(entity);
         Map<String, Object> result = Maps.newHashMap();

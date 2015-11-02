@@ -1,30 +1,48 @@
 package k0n9.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import k0n9.common.utils.Reflections;
-import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
+ * 树形实体继承该实体
+ *
  * @author David Kong
  * @version 1.0
  */
-public abstract class TreeEntity<T> extends BaseNativeEntity {
+public abstract class TreeEntity<T,ID extends Serializable> extends BaseEntity<ID> {
 
     private static final long serialVersionUID = -8283898532047691696L;
 
+    /**
+     * 父对象
+     */
     protected T parent;
+    /**
+     * 父ID的字符串
+     */
     private String parentIds;
+    /**
+     * 名称
+     */
     private String name;
+    /**
+     * 排序
+     */
     private Integer sort;
+    /**
+     * 显示图标
+     */
+    private String icon;
 
     @JsonBackReference
-    @NotNull
     public abstract T getParent();
 
     public abstract void setParent(T parent);
 
+    @JsonIgnore
     public String getParentIds() {
         return parentIds;
     }
@@ -33,6 +51,7 @@ public abstract class TreeEntity<T> extends BaseNativeEntity {
         this.parentIds = parentIds;
     }
 
+    @JsonProperty
     public String getName() {
         return name;
     }
@@ -41,6 +60,7 @@ public abstract class TreeEntity<T> extends BaseNativeEntity {
         this.name = name;
     }
 
+    @JsonProperty
     public Integer getSort() {
         return sort;
     }
@@ -49,11 +69,12 @@ public abstract class TreeEntity<T> extends BaseNativeEntity {
         this.sort = sort;
     }
 
-    public String getParentId() {
-        String id = null;
-        if (parent != null){
-            id = (String) Reflections.getFieldValue(parent, "id");
-        }
-        return StringUtils.isNotBlank(id) ? id : "0";
+    @JsonProperty
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

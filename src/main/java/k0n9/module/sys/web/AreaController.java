@@ -44,7 +44,7 @@ public class AreaController extends BaseController<Area,Long> {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public PageInfo<Area> findByPage(HttpServletRequest request){
-        return  super.findByPage(new Area(),request);
+        return super.findByPage(new Area(),request);
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)

@@ -1,67 +1,96 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <title>测试系统</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>区域管理</title>
 </head>
 <body>
-<table id="grid-sys-area-index"></table>
-<div id="grid-pager"></div>
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+  <div class="col-md-12">
+    <table id="tree"></table>
+    <div id="pager"></div>
+  </div>
+</div>
+<!-- END PAGE CONTENT-->
 <script type="text/javascript">
-  $(document).ready(function () {
-    $("#grid-sys-area-index").jqGrid({
-      url: '${ctx}/a/sys/area/list',
-      mtype: "GET",
-      styleUI : 'Bootstrap',
-      datatype: "json",
-      jsonReader: {repeatitems: false, root: "list", total: "pages", records: "total"},
-      colModel: [
-        { label: 'ID', name: 'id', key: true,editable:true, width: 75 },
-        { label: 'parentIds', name: 'parentIds',editable:true, width: 150 },
-        { label: 'parent.id', name: 'parent.id',editable:true, width: 150 },
-        { label: 'code', name: 'code',editable:true, width: 150 },
-        { label: 'name', name: 'name',editable:true, width: 150 },
-        { label: 'type', name: 'type',editable:true, width: 150 },
-        { label: 'sort', name: 'sort',editable:true, width: 150 },
-        { label:'remarks', name: 'remarks',editable:true, width: 150 }
+  jQuery(document).ready(function($) {
+    jQuery('#tree').jqGrid({
+      "width":800,
+      "hoverrows":false,
+      "viewrecords":false,
+      "gridview":true,
+      "url": WEB_ROOT +'/a/sys/area/list',
+      "editurl" : WEB_ROOT +"/a/sys/area/edit",
+      "ExpandColumn":"name",
+      "height":"auto",
+      "scrollrows":true,
+      "treeGrid":true,
+      "treedatatype":"json",
+      "treeGridModel":"adjacency",
+      "loadonce":true,
+      "rowNum":1000,
+      jsonReader: {repeatitems: false, root: "list", total: "total", records: "pages"},
+      "treeReader":{
+        "parent_id_field":"parentId",
+        "level_field":"level",
+        "leaf_field":"isLeaf",
+        "expanded_field":"expanded",
+        "loaded":"loaded",
+        "icon_field":"icon"
+      },
+      "datatype":"json",
+      "colModel":[
+        {
+          "name":"code",
+          "label":"区域编码",
+          "width":170,
+          "editable":true
+        },
+        {
+          "name":"name",
+          "label":"区域名称",
+          "width":170,
+          "editable":true
+        },{
+          "name":"type",
+          "label":"区域类型",
+          "width":90,
+          "editable":true
+        },{
+          "name":"remarks",
+          "label":"备注",
+          "width":90,
+          "editable":true
+        },{
+          "name":"parentId",
+          "hidden":true
+        }
       ],
-      viewrecords: true,
-      height: 250,
-      rowNum: 20,
-      pager: "#grid-pager",
-      editurl:"${ctx}/a/sys/area/edit"
+      "pager":"#pager"
     });
-    $('#grid-sys-area-index').navGrid('#grid-pager',
-        // the buttons to appear on the toolbar of the grid
-        { edit: true, add: true, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false },
-        // options for the Edit Dialog
+    // nable add
+    jQuery('#tree').jqGrid('navGrid','#pager',
         {
-          editCaption: "The Edit Dialog",
-          recreateForm: true,
-          checkOnUpdate : true,
-          checkOnSubmit : true,
-          closeAfterEdit: true,
-          errorTextFormat: function (data) {
-            return 'Error: ' + data.responseText
-          }
+          "edit":true,
+          "add":true,
+          "del":true,
+          "search":false,
+          "refresh":true,
+          "view":false,
+          "excel":false,
+          "pdf":false,
+          "csv":false,
+          "columns":false
         },
-        // options for the Add Dialog
-        {
-          closeAfterAdd: true,
-          recreateForm: true,
-          errorTextFormat: function (data) {
-            return 'Error: ' + data.responseText
-          }
-        },
-        // options for the Delete Dailog
-        {
-          errorTextFormat: function (data) {
-            return 'Error: ' + data.responseText
-          }
-        });
+        {"drag":true,"resize":true,"closeOnEscape":true,"dataheight":150},
+        {"drag":true,"resize":true,"closeOnEscape":true,"dataheight":150}
+    );
+    jQuery('#tree').jqGrid('bindKeys');
   });
-
 </script>
 </body>
 </html>

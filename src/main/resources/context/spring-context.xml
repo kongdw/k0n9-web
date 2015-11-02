@@ -31,7 +31,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="k0n9"/>
-        <property name="typeAliasesSuperType" value="k0n9.common.entity.PersistableEntity"/>
+        <property name="typeAliasesSuperType" value="k0n9.common.entity.BaseEntity"/>
         <property name="mapperLocations" value="classpath:/mappings/**/*.xml"/>
         <property name="configLocation" value="classpath:/mybatis-config.xml"/>
     </bean>
