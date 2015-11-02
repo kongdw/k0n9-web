@@ -1,4 +1,4 @@
-drop TABLE sys_area;
+DROP TABLE IF EXISTS sys_area;
 CREATE TABLE sys_area
 (
   id BIGINT NOT NULL AUTO_INCREMENT,
