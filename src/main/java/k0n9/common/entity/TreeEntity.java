@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author David Kong
  * @version 1.0
  */
-public abstract class TreeEntity<T,ID extends Serializable> extends BaseEntity<ID> {
+public abstract class TreeEntity<T,ID extends Serializable> extends AbstractEntity<ID> {
 
     private static final long serialVersionUID = -8283898532047691696L;
 
