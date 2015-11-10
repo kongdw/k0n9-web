@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import k0n9.common.entity.BaseEntity;
+import k0n9.common.entity.plugin.Persistable;
 import k0n9.common.service.BaseService;
 import k0n9.common.web.view.OperationResult;
 import org.apache.commons.lang3.BooleanUtils;
@@ -26,7 +26,7 @@ import java.util.Set;
  * @author David Kong
  * @version 1.0
  */
-public abstract class BaseController<T extends BaseEntity<ID>, ID extends Serializable> {
+public abstract class BaseController<T extends Persistable<ID>, ID extends Serializable> {
 
     private final static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
@@ -86,14 +86,8 @@ public abstract class BaseController<T extends BaseEntity<ID>, ID extends Serial
         //对于批量删除,循环每个对象调用Service接口删除,则各对象删除事务分离
         //这样可以方便某些对象删除失败不影响其他对象删除
         //如果业务逻辑需要确保批量对象删除在同一个事务则请子类覆写调用Service的批量删除接口
-        for (T entity : enableDeleteEntities) {
-            try {
-                getEntityService().delete(entity);
-            } catch (Exception e) {
-                logger.warn("entity delete failure", e);
-                errorMessageMap.put(entity.getId(), e.getMessage());
-            }
-        }
+        getEntityService().delete(ids);
+
         int rejectSize = errorMessageMap.size();
         if (rejectSize == 0) {
             return OperationResult.buildSuccessResult("成功删除所选选取记录:" + entities.size() + "条");

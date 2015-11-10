@@ -19,7 +19,7 @@
 <%--<link href="${ctx}/assets/global/plugins/jqGrid/css/ui.jqgrid-bootstrap.css" rel="stylesheet" type="text/css"/>--%>
 <link href="${ctx}/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 <%--<link href="${ctx}/assets/global/plugins/jqGrid/css/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" type="text/css"/>--%>
-<link href="${ctx}/assets/global/plugins/jqGrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css"/>
+<%--<link href="${ctx}/assets/global/plugins/jqGrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css"/>--%>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="${ctx}/assets/img/favicon.ico" />
 

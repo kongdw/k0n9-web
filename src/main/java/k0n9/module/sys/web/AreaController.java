@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author David Kong
@@ -43,8 +44,8 @@ public class AreaController extends BaseController<Area,Long> {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
-    public PageInfo<Area> findByPage(HttpServletRequest request){
-        return super.findByPage(new Area(),request);
+    public List<Area> findByList(HttpServletRequest request){
+        return super.findList(new Area());
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -53,7 +54,7 @@ public class AreaController extends BaseController<Area,Long> {
         return super.editSave(area);
     }
 
-    @ModelAttribute
+    @ModelAttribute("entity")
     public void prepareModel(Model model, @RequestParam(value = "id", required = false) Long id) {
         super.initPrepareModel(model, id);
     }

@@ -11,86 +11,75 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
   <div class="col-md-12">
-    <table id="tree"></table>
-    <div id="pager"></div>
+    <%--<div class="note note-success">--%>
+      <%--<p>--%>
+        <%--GTreeTable is extension of Tweeter Bootstrap 3 framework, which allows to use tree structure inside HTML table. Full documentation is available <a href="https://github.com/gilek/bootstrap-gtreetable" target="_blank">here</a>--%>
+      <%--</p>--%>
+    <%--</div>--%>
+    <!-- BEGIN PORTLET-->
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-purple-plum">
+          <i class="icon-speech font-purple-plum"></i>
+          <span class="caption-subject bold uppercase"> Demo 2</span>
+          <span class="caption-helper">right click inside the box</span>
+        </div>
+        <div class="actions">
+          <div class="btn-group">
+            <a class="btn btn-circle btn-default btn-sm" href="javascript:;" data-toggle="dropdown">
+              <i class="fa fa-user"></i> User <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="javascript:;">
+                  <i class="icon-user"></i> New User </a>
+              </li>
+              <li>
+                <a href="javascript:;">
+                  <i class="icon-present"></i> New Event <span class="badge badge-success">4</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;">
+                  <i class="icon-basket"></i> New order </a>
+              </li>
+              <li class="divider">
+              </li>
+              <li>
+                <a href="javascript:;">
+                  <i class="icon-flag"></i> Pending Orders <span class="badge badge-danger">4</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;">
+                  <i class="icon-users"></i> Pending Users <span class="badge badge-warning">12</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <a href="javascript:;" class="btn btn-circle red-sunglo btn-sm">
+            <i class="fa fa-plus"></i> Add </a>
+          <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
+          </a>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <table class="table table-hover table-light gtreetable" id="gtreetable">
+          <thead>
+          <tr>
+            <th>
+              name
+            </th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <!-- END PORTLET-->
   </div>
 </div>
 <!-- END PAGE CONTENT-->
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-    jQuery('#tree').jqGrid({
-      "width":800,
-      "hoverrows":false,
-      "viewrecords":false,
-      "gridview":true,
-      "url": WEB_ROOT +'/a/sys/area/list',
-      "editurl" : WEB_ROOT +"/a/sys/area/edit",
-      "ExpandColumn":"name",
-      "height":"auto",
-      "scrollrows":true,
-      "treeGrid":true,
-      "treedatatype":"json",
-      "treeGridModel":"adjacency",
-      "loadonce":true,
-      "rowNum":1000,
-      jsonReader: {repeatitems: false, root: "list", total: "total", records: "pages"},
-      "treeReader":{
-        "parent_id_field":"parentId",
-        "level_field":"level",
-        "leaf_field":"isLeaf",
-        "expanded_field":"expanded",
-        "loaded":"loaded",
-        "icon_field":"icon"
-      },
-      "datatype":"json",
-      "colModel":[
-        {
-          "name":"code",
-          "label":"区域编码",
-          "width":170,
-          "editable":true
-        },
-        {
-          "name":"name",
-          "label":"区域名称",
-          "width":170,
-          "editable":true
-        },{
-          "name":"type",
-          "label":"区域类型",
-          "width":90,
-          "editable":true
-        },{
-          "name":"remarks",
-          "label":"备注",
-          "width":90,
-          "editable":true
-        },{
-          "name":"parentId",
-          "hidden":true
-        }
-      ],
-      "pager":"#pager"
-    });
-    // nable add
-    jQuery('#tree').jqGrid('navGrid','#pager',
-        {
-          "edit":true,
-          "add":true,
-          "del":true,
-          "search":false,
-          "refresh":true,
-          "view":false,
-          "excel":false,
-          "pdf":false,
-          "csv":false,
-          "columns":false
-        },
-        {"drag":true,"resize":true,"closeOnEscape":true,"dataheight":150},
-        {"drag":true,"resize":true,"closeOnEscape":true,"dataheight":150}
-    );
-    jQuery('#tree').jqGrid('bindKeys');
-  });
-</script>
+<!-- END PAGE CONTENT-->
+
 </body>
 </html>

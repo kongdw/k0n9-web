@@ -1,7 +1,7 @@
 package k0n9.common.service;
 
 import k0n9.common.dao.BaseDao;
-import k0n9.common.entity.BaseEntity;
+import k0n9.common.entity.plugin.Persistable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author David Kong
  * @version 1.0
  */
-public abstract class BaseService<T extends BaseEntity, ID extends Serializable> {
+public abstract class BaseService<T extends Persistable, ID extends Serializable> {
 
     private final Logger logger = LoggerFactory.getLogger(BaseService.class);
 
@@ -44,25 +44,19 @@ public abstract class BaseService<T extends BaseEntity, ID extends Serializable>
 
     /**
      * 数据删除操作
-     * @param entity 待操作数据
+     * @param id 待操作数据
      */
-    public int delete(T entity) {
-        return getEntityDao().delete(entity);
+    public int delete(ID id) {
+        return getEntityDao().delete(id);
     }
 
     /**
-     * 批量数据删除操作 其实现只是简单循环集合每个元素调用
-     * 因此并无实际的Batch批量处理，如果需要数据库底层批量支持请自行实现
      *
-     * @param entities 待批量操作数据集合
+     * @param ids 批量删除ids数组
      * @return
      */
-    public int delete(Iterable<T> entities) {
-        int count = 0;
-        for (T entity : entities) {
-            count = count + delete(entity);
-        }
-        return count;
+    public int delete(ID... ids) {
+        return getEntityDao().deleteByIds(ids);
     }
 
     /**
@@ -93,7 +87,7 @@ public abstract class BaseService<T extends BaseEntity, ID extends Serializable>
      */
     @Transactional(readOnly = true)
     public List<T> findList(T entity) {
-        return getEntityDao().findList(entity);
+        return getEntityDao().findByPage(entity);
     }
 
     /**
@@ -105,7 +99,7 @@ public abstract class BaseService<T extends BaseEntity, ID extends Serializable>
     @Transactional(readOnly = true)
     public List<T> findAll(final ID... ids) {
         Assert.isTrue(ids != null && ids.length > 0, "必须提供有效查询主键集合");
-        return this.getEntityDao().findAll(ids);
+        return this.getEntityDao().findByIds(ids);
     }
 
     /**

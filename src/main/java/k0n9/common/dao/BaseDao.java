@@ -26,10 +26,12 @@ public interface BaseDao<T,ID extends Serializable> {
 
     /**
      * 删除数据
-     * @param entity
+     * @param id
      * @return
      */
-    int delete(T entity);
+    int delete(ID id);
+
+    int deleteByIds(ID... ids);
 
     /**
      * 获取一条数据
@@ -38,22 +40,24 @@ public interface BaseDao<T,ID extends Serializable> {
      */
     T get(ID id);
 
-    T get(T entity);
-
     /**
      * 分页查询
      * @param entity
      * @return
      */
-    List<T> findList(T entity);
+    List<T> findByPage(T entity);
 
     /**
      * 查询所有数据列表
      * @param entity
      * @return
      */
-    List<T> findAllList(T entity);
+    List<T> findByList(T entity);
 
-
-    List<T> findAll(ID[] ids);
+    /**
+     * 查询ID数组
+     * @param ids
+     * @return
+     */
+    List<T> findByIds(ID[] ids);
 }
