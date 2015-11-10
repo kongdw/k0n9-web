@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import k0n9.common.entity.plugin.Persistable;
+import k0n9.common.entity.BaseEntity;
 import k0n9.common.service.BaseService;
 import k0n9.common.web.view.OperationResult;
 import org.apache.commons.lang3.BooleanUtils;
@@ -26,7 +26,7 @@ import java.util.Set;
  * @author David Kong
  * @version 1.0
  */
-public abstract class BaseController<T extends Persistable<ID>, ID extends Serializable> {
+public abstract class BaseController<T extends AbstractEntity<ID>, ID extends Serializable> {
 
     private final static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
