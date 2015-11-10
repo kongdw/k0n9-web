@@ -1,4 +1,4 @@
-package k0n9.common.entity;
+package k0n9.common.entity.plugin;
 
 /**
  * <p>实体实现该接口表示想要逻辑删除
@@ -7,15 +7,15 @@ package k0n9.common.entity;
  *         date : 2015/11/9
  * @version 1.0
  */
-public interface LogicDeleteable {
+public interface LogicDelete {
 
-    public Boolean getDeleted();
+    Boolean getDeleted();
 
-    public void setDeleted(Boolean deleted);
+    void setDeleted(Boolean deleted);
 
     /**
      * 标识为已删除
      */
-    public void markDeleted();
+    void markDeleted();
 
 }
