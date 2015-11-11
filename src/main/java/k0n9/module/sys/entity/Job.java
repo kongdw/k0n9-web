@@ -3,12 +3,12 @@ package k0n9.module.sys.entity;
 import k0n9.common.entity.TreeEntity;
 
 /**
- * 区域实体
+ * 工作职务实体
  *
  * @author David Kong
  * @version 1.0
  */
-public class Area extends TreeEntity<Long> {
+public class Job extends TreeEntity<Long> {
 
     private static final long serialVersionUID = -5103053863938072888L;
 
@@ -16,11 +16,7 @@ public class Area extends TreeEntity<Long> {
 
     private Long parentId;
 
-    private String code;
-
-    private String type;
-
-    private String remarks;
+    private Boolean isShow = Boolean.TRUE;
 
     @Override
     public Long getParentId() {
@@ -42,27 +38,13 @@ public class Area extends TreeEntity<Long> {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    @Override
+    public Boolean getIsShow() {
+        return isShow;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    @Override
+    public void setIsShow(Boolean isShow) {
+        this.isShow = isShow;
     }
 }

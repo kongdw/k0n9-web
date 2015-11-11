@@ -6,7 +6,7 @@ var TableTree = function() {
             'source': function (id) {
                 return {
                     type: 'GET',
-                    url: WEB_ROOT +'/a/sys/area/list',
+                    url: WEB_ROOT +'/a/sys/job/list',
                     data: { 'id': id },
                     dataType: 'json',
                     error: function(XMLHttpRequest) {

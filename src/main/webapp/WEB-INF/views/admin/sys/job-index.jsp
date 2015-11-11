@@ -26,7 +26,7 @@
         </div>
         <div class="actions">
           <div class="btn-group">
-            <a class="btn btn-circle btn-default btn-sm" href="javascript:;" data-toggle="dropdown">
+            <a class="btn btn-default btn-sm" href="javascript:;" data-toggle="dropdown">
               <i class="fa fa-user"></i> User <i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu" role="menu">
@@ -57,7 +57,7 @@
               </li>
             </ul>
           </div>
-          <a href="javascript:;" class="btn btn-circle red-sunglo btn-sm">
+          <a href="javascript:;" class="btn btn-default btn-sm">
             <i class="fa fa-plus"></i> Add </a>
           <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
           </a>

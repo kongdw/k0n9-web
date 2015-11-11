@@ -1,12 +1,11 @@
 package k0n9.module.sys.web;
 
-import com.github.pagehelper.PageInfo;
-import k0n9.common.annotation.MenuData;
+import k0n9.common.annotation.ResourceData;
 import k0n9.common.service.BaseService;
 import k0n9.common.web.BaseController;
 import k0n9.common.web.view.OperationResult;
-import k0n9.module.sys.entity.Area;
-import k0n9.module.sys.service.AreaService;
+import k0n9.module.sys.entity.Job;
+import k0n9.module.sys.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,38 +19,38 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-@RequestMapping("${adminPath}/sys/area")
-public class AreaController extends BaseController<Area,Long> {
+@RequestMapping("${adminPath}/sys/job")
+public class JobController extends BaseController<Job,Long> {
 
     @Autowired
-    private AreaService areaService;
+    private JobService jobService;
 
     @Override
-    protected BaseService<Area, Long> getEntityService() {
-        return areaService;
+    protected BaseService<Job, Long> getEntityService() {
+        return jobService;
     }
 
     @Override
-    protected Area buildBindingEntity() {
-        return new Area();
+    protected Job buildBindingEntity() {
+        return new Job();
     }
 
-    @MenuData(value = "系统配置:区域管理")
+    @ResourceData(value = "系统配置:区域管理")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
-        return "admin/sys/area-index";
+        return "admin/sys/job-index";
     }
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
-    public List<Area> findByList(HttpServletRequest request){
-        return super.findList(new Area());
+    public List<Job> findByList(HttpServletRequest request){
+        return super.findList(new Job());
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    public OperationResult editSave(@ModelAttribute("entity") Area area,Model model) {
-        return super.editSave(area);
+    public OperationResult editSave(@ModelAttribute("entity") Job job,Model model) {
+        return super.editSave(job);
     }
 
     @ModelAttribute("entity")

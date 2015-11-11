@@ -1,6 +1,7 @@
 package k0n9.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import k0n9.common.entity.plugin.Persistable;
@@ -14,6 +15,7 @@ import java.util.Map;
  * @author David Kong
  * @version 1.0
  */
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class BaseEntity<ID extends Serializable> implements Persistable<ID> {
 
     private static final long serialVersionUID = 8735316878185564089L;
