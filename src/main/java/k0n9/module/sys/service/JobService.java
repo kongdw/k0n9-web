@@ -2,8 +2,8 @@ package k0n9.module.sys.service;
 
 import k0n9.common.dao.BaseDao;
 import k0n9.common.service.BaseService;
-import k0n9.module.sys.dao.AreaDao;
-import k0n9.module.sys.entity.Area;
+import k0n9.module.sys.dao.JobDao;
+import k0n9.module.sys.entity.Job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class AreaService  extends BaseService<Area,Long> {
+public class JobService extends BaseService<Job,Long> {
 
     @Autowired
-    private AreaDao areaDao;
+    private JobDao jobDao;
 
     @Override
-    protected BaseDao<Area,Long> getEntityDao() {
-        return areaDao;
+    protected BaseDao<Job,Long> getEntityDao() {
+        return jobDao;
     }
 
 
