@@ -9,7 +9,6 @@
 <link href="${ctx}/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
-<link rel="stylesheet" type="text/css" href="${ctx}/assets/global/plugins/bootstrap-gtreetable/bootstrap-gtreetable.min.css"/>
 <!-- BEGIN THEME STYLES -->
 <link href="${ctx}/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
