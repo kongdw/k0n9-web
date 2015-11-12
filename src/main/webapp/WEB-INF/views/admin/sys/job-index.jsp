@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>区域管理</title>
+  <title>工作职务管理</title>
 </head>
 <body>
 <!-- BEGIN PAGE CONTENT-->
@@ -21,47 +21,47 @@
       <div class="portlet-title">
         <div class="caption font-purple-plum">
           <i class="icon-speech font-purple-plum"></i>
-          <span class="caption-subject bold uppercase"> Demo 2</span>
-          <span class="caption-helper">right click inside the box</span>
+          <span class="caption-subject bold uppercase">工作职务管理</span>
+          <span class="caption-helper"></span>
         </div>
-        <div class="actions">
-          <div class="btn-group">
-            <a class="btn btn-default btn-sm" href="javascript:;" data-toggle="dropdown">
-              <i class="fa fa-user"></i> User <i class="fa fa-angle-down"></i>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="javascript:;">
-                  <i class="icon-user"></i> New User </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <i class="icon-present"></i> New Event <span class="badge badge-success">4</span>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <i class="icon-basket"></i> New order </a>
-              </li>
-              <li class="divider">
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <i class="icon-flag"></i> Pending Orders <span class="badge badge-danger">4</span>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <i class="icon-users"></i> Pending Users <span class="badge badge-warning">12</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <a href="javascript:;" class="btn btn-default btn-sm">
-            <i class="fa fa-plus"></i> Add </a>
-          <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
-          </a>
-        </div>
+        <%--<div class="actions">--%>
+          <%--<div class="btn-group">--%>
+            <%--<a class="btn btn-default btn-sm" href="javascript:;" data-toggle="dropdown">--%>
+              <%--<i class="fa fa-user"></i> User <i class="fa fa-angle-down"></i>--%>
+            <%--</a>--%>
+            <%--<ul class="dropdown-menu" role="menu">--%>
+              <%--<li>--%>
+                <%--<a href="javascript:;">--%>
+                  <%--<i class="icon-user"></i> New User </a>--%>
+              <%--</li>--%>
+              <%--<li>--%>
+                <%--<a href="javascript:;">--%>
+                  <%--<i class="icon-present"></i> New Event <span class="badge badge-success">4</span>--%>
+                <%--</a>--%>
+              <%--</li>--%>
+              <%--<li>--%>
+                <%--<a href="javascript:;">--%>
+                  <%--<i class="icon-basket"></i> New order </a>--%>
+              <%--</li>--%>
+              <%--<li class="divider">--%>
+              <%--</li>--%>
+              <%--<li>--%>
+                <%--<a href="javascript:;">--%>
+                  <%--<i class="icon-flag"></i> Pending Orders <span class="badge badge-danger">4</span>--%>
+                <%--</a>--%>
+              <%--</li>--%>
+              <%--<li>--%>
+                <%--<a href="javascript:;">--%>
+                  <%--<i class="icon-users"></i> Pending Users <span class="badge badge-warning">12</span>--%>
+                <%--</a>--%>
+              <%--</li>--%>
+            <%--</ul>--%>
+          <%--</div>--%>
+          <%--<a href="javascript:;" class="btn btn-default btn-sm">--%>
+            <%--<i class="fa fa-plus"></i> Add </a>--%>
+          <%--<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">--%>
+          <%--</a>--%>
+        <%--</div>--%>
       </div>
       <div class="portlet-body">
         <table class="table table-hover table-light gtreetable" id="gtreetable">
@@ -80,6 +80,5 @@
 </div>
 <!-- END PAGE CONTENT-->
 <!-- END PAGE CONTENT-->
-
 </body>
 </html>

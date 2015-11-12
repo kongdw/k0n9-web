@@ -1,5 +1,6 @@
 package k0n9.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import k0n9.common.entity.plugin.Tree;
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * @author David Kong
  * @version 1.0
  */
-public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID> implements Tree<ID>,Serializable {
+public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID> implements Tree<ID>, Serializable {
 
     private static final long serialVersionUID = 7013548013739460184L;
     /**
@@ -51,6 +52,7 @@ public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID>
 
     public abstract void setParentId(ID parentId);
 
+    @JsonIgnore
     public String getParentIds() {
         return parentIds;
     }
@@ -65,6 +67,7 @@ public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID>
     }
 
     @Override
+    @JsonIgnore
     public String getSeparator() {
         return "/";
     }
@@ -97,8 +100,20 @@ public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID>
 
     @Override
     public boolean isRoot() {
-        Serializable id = getId();
-        return id == null || StringUtils.isBlank(String.valueOf(id));
+        Serializable id = getParentId();
+        if (id == null) {
+            return true;
+        }
+        if (id instanceof String) {
+            return StringUtils.isBlank(String.valueOf(getParentId()));
+        }
+        if (id instanceof Long) {
+            return (Long) id == 0l;
+        }
+        if (id instanceof Integer) {
+            return (Integer) id == 0;
+        }
+        return false;
     }
 
 
@@ -119,10 +134,21 @@ public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID>
         return hasChildren;
     }
 
+
+    public int getLevel() {
+        String s = parentIds; // 0/
+        if (StringUtils.isNotBlank(s)) {
+            String[] ids = s.split(getSeparator());
+            return ids.length;
+        }
+        return 1;
+    }
+
     public void setHasChildren(boolean hasChildren) {
         this.hasChildren = hasChildren;
     }
 
+    @JsonIgnore
     public Boolean getIsShow() {
         return isShow;
     }
@@ -137,6 +163,7 @@ public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID>
      * @return
      */
     @Override
+    @JsonIgnore
     public String getRootDefaultIcon() {
         return "ztree_root_open";
     }
@@ -147,6 +174,7 @@ public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID>
      * @return
      */
     @Override
+    @JsonIgnore
     public String getBranchDefaultIcon() {
         return "ztree_branch";
     }
@@ -157,6 +185,7 @@ public abstract class TreeEntity<ID extends Serializable> extends BaseEntity<ID>
      * @return
      */
     @Override
+    @JsonIgnore
     public String getLeafDefaultIcon() {
         return "ztree_leaf";
     }
