@@ -33,7 +33,7 @@
 		ORDER BY a.id
 	</select>
 	
-	<select id="findByPage" resultType="Job">
+	<select id="findByPage" resultType="Job" parameterType="">
 		SELECT
 			<include refid="JobColumns"/>
 		FROM sys_job a
@@ -42,8 +42,9 @@
             <if test="sqlMap != null and sqlMap.dsf != null">
                 ${sqlMap.dsf}
             </if>
+            <if test="office.id!=null">
+            </if>
         </where>
-		ORDER BY a.id
 	</select>
 
 	<select id="findByIds" resultType="Job">

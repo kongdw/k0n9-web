@@ -38,6 +38,7 @@ public class JobController extends BaseController<Job,Long> {
     @ResourceData(value = "系统配置:区域管理")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
+        model.addAttribute("list",super.findList(new Job()));
         return "admin/sys/job-index";
     }
 
