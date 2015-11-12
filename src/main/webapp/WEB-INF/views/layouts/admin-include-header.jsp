@@ -8,6 +8,9 @@
 <link href="${ctx}/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx}/assets/global/plugins/jquery-treetable/jquery.treetable.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx}/assets/global/plugins/jquery-treetable/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN THEME STYLES -->
 <link href="${ctx}/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
@@ -15,10 +18,7 @@
 <link href="${ctx}/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
 <link id="style_color" href="${ctx}/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
-<%--<link href="${ctx}/assets/global/plugins/jqGrid/css/ui.jqgrid-bootstrap.css" rel="stylesheet" type="text/css"/>--%>
 <link href="${ctx}/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-<%--<link href="${ctx}/assets/global/plugins/jqGrid/css/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" type="text/css"/>--%>
-<%--<link href="${ctx}/assets/global/plugins/jqGrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css"/>--%>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="${ctx}/assets/img/favicon.ico" />
 

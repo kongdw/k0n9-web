@@ -14,6 +14,7 @@
 <script src="${ctx}/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 <script src="${ctx}/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <script src="${ctx}/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="${ctx}/assets/global/plugins/jquery-treetable/jquery.treetable.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <script src="${ctx}/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="${ctx}/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
