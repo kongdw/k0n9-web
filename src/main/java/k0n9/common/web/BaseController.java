@@ -26,7 +26,7 @@ import java.util.Set;
  * @author David Kong
  * @version 1.0
  */
-public abstract class BaseController<T extends AbstractEntity<ID>, ID extends Serializable> {
+public abstract class BaseController<T extends BaseEntity<ID>, ID extends Serializable> {
 
     private final static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
