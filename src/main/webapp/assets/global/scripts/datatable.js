@@ -119,7 +119,7 @@ var Datatable = function() {
 
                             Metronic.unblockUI(tableContainer);
 
-                            return res.data;
+                            return res.list;
                         },
                         "error": function() { // handle general connection errors
                             if (tableOptions.onError) {

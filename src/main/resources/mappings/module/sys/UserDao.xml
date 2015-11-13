@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="k0n9.module.sys.dao.UserDao">
+    
+	<sql id="UserColumns">
+		a.id,
+	    a.username,
+		a.email,
+		a.phone_number,
+		a.create_date,
+		a.status,
+		a.deleted,
+		a.is_admin
+	</sql>
+	
+	<!--<sql id="UserJoins">-->
+		<!--LEFT JOIN sys_office p ON p.id = a.parent_id-->
+    <!--</sql>-->
+    
+	<select id="get" resultType="User">
+		SELECT
+			<include refid="UserColumns"/>
+		FROM sys_User a
+		<!--<include refid="UserJoins"/>-->
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findByList" resultType="User">
+		SELECT
+			<include refid="UserColumns"/>
+		FROM sys_User a
+		<!--<include refid="UserJoins"/>-->
+		ORDER BY a.id
+	</select>
+	
+	<select id="findByPage" resultType="User">
+		SELECT
+			<include refid="UserColumns"/>
+		FROM sys_User a
+		<!--<include refid="UserJoins"/>-->
+        <where>
+            <if test="sqlMap != null and sqlMap.dsf != null">
+                ${sqlMap.dsf}
+            </if>
+        </where>
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_User(
+		    USERNAME,
+			EMAIL,
+			PHONE_NUMBER,
+			PASSWORD,
+			SALT,
+			CREATE_DATE,
+			STATUS,
+			IS_ADMIN
+		) VALUES (
+		    #{username},
+			#{email},
+			#{phoneNumber},
+			#{password},
+			#{salt},
+			#{createDate},
+			#{status},
+			#{isAdmin}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_User
+		<set>
+            <if test="email!= null">
+                EMAIL = #{email},
+            </if>
+            <if test="phoneNumber!= null">
+                PHONE_NUMBER = #{phoneNumber},
+            </if>
+            <if test="createDate!= null">
+                CREATE_DATE = #{createDate},
+            </if>
+            <if test="status!= null">
+                STATUS = #{status},
+            </if>
+            <if test="isAdmin!= null">
+                IS_ADMIN = #{isAdmin},
+            </if>
+            <if test="deleted!= null">
+                DELETED = #{deleted}
+            </if>
+        </set>
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+       UPDATE sys_User SET
+			DELETED = TRUE
+		WHERE id = #{id}
+    </update>
+
+    <update id="deleteByIds">
+        UPDATE sys_User set DELETED = TRUE
+        WHERE id IN
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

@@ -1,19 +1,16 @@
+import k0n9.BaseTest;
 import k0n9.module.sys.dao.JobDao;
 import k0n9.module.sys.entity.Job;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:context/spring-context.xml")
-public class JobDaoTest {
+
+public class JobDaoTest extends BaseTest{
 
     private Logger log = LoggerFactory.getLogger(JobDaoTest.class);
     @Autowired

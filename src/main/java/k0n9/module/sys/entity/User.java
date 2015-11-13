@@ -1,5 +1,6 @@
 package k0n9.module.sys.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import k0n9.common.entity.BaseEntity;
 
 import java.util.Date;
@@ -59,6 +60,7 @@ public class User extends BaseEntity<Long> {
         this.phoneNumber = phoneNumber;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -67,6 +69,7 @@ public class User extends BaseEntity<Long> {
         this.password = password;
     }
 
+    @JsonIgnore
     public String getSalt() {
         return salt;
     }

@@ -83,28 +83,28 @@
                 <input type="checkbox" class="group-checkable">
               </th>
               <th width="5%">
-                Record&nbsp;#
+                用户名
               </th>
               <th width="15%">
-                Date
+                email
               </th>
               <th width="15%">
-                Customer
+                电话号
               </th>
               <th width="10%">
-                Ship&nbsp;To
+                注册时间
               </th>
               <th width="10%">
-                Price
+                状态
               </th>
               <th width="10%">
-                Amount
+                是否删除
               </th>
               <th width="10%">
-                Status
+                是否管理员
               </th>
               <th width="10%">
-                Actions
+                操作
               </th>
             </tr>
             <tr role="row" class="filter">

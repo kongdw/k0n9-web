@@ -87,7 +87,7 @@ public abstract class BaseService<T extends Persistable, ID extends Serializable
      */
     @Transactional(readOnly = true)
     public List<T> findList(T entity) {
-        return getEntityDao().findByPage(entity);
+        return getEntityDao().findByList(entity);
     }
 
     /**
