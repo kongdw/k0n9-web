@@ -12,10 +12,10 @@
     $(document).ready(function () {
       var tpl = $("#treeTableTpl").html();
       Mustache.parse(tpl);
+      Metronic.blockUI();
       $.ajax({
         url: '${ctx}/a/sys/job/list',
         type: 'get',
-        async: false,
         error: function () {
           alert('error');
         },
@@ -24,6 +24,7 @@
           $("#treeTable").treeTable({expandLevel: 2});
         }
       });
+      Metronic.unblockUI();
       <%--var data = ${fns:toJson(list)};--%>
       <%--var rootId = "${not empty parentId ? parentId : '0'}";--%>
 

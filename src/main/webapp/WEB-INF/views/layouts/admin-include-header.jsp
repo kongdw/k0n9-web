@@ -11,6 +11,11 @@
 <link href="${ctx}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/assets/global/plugins/treeTable/themes/vsStyle/treeTable.min.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
+
+<link rel="stylesheet" type="text/css" href="${ctx}/assets/global/plugins/select2/select2.css"/>
+<link rel="stylesheet" type="text/css" href="${ctx}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="${ctx}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+
 <!-- BEGIN THEME STYLES -->
 <link href="${ctx}/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
@@ -20,7 +25,6 @@
 <link href="${ctx}/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="${ctx}/assets/img/favicon.ico" />
-
 <script type="text/javascript">
     var WEB_ROOT = "${ctx}";
 </script>
