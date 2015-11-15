@@ -2,6 +2,8 @@ package k0n9.module.sys.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import k0n9.common.entity.BaseEntity;
+import k0n9.common.utils.DateUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -77,6 +79,8 @@ public class User extends BaseEntity<Long> {
     public void setSalt(String salt) {
         this.salt = salt;
     }
+
+    @DateTimeFormat(pattern = DateUtils.DEFAULT_DATE_FORMAT)
 
     public Date getCreateDate() {
         return createDate;

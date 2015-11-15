@@ -26,7 +26,7 @@ var TableAjax = function () {
             onDataLoad: function (grid) {
                 // execute some code on ajax data load
             },
-            loadingMessage: 'Loading...',
+            loadingMessage: '加载中...',
             dataTable: {
                 // here you can define a typical datatable settings from http://datatables.net/usage/options
                 // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
@@ -43,18 +43,14 @@ var TableAjax = function () {
                     "type": "get",
                     "url": WEB_ROOT + "/a/sys/user/list" // ajax source
                 },
-                //"columnDefs": [{
-                //    "targets": 0,
-                //    "data": null,
-                //    "defaultContent": "<button>Click!</button>"
-                //}, {
-                //    "targets": -1,
-                //    "data": null,
-                //    "defaultContent": "<button>Click!</button>"
-                //}
-                //],
                 "columns": [
-                    {"data": ''},
+                    {
+                        "orderable": false,
+                        "data": null,
+                        render: function (data, type, row) {
+                            return '<input type="checkbox" name="id[]" value="' + row.id + '">';
+                        }
+                    },
                     {"data": "username"},
                     {"data": "email"},
                     {"data": "phoneNumber"},
@@ -62,7 +58,11 @@ var TableAjax = function () {
                     {"data": "status"},
                     {"data": "deleted"},
                     {"data": "isAdmin"},
-                    {"data": ''}
+                    {
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": '<div class="btn-group-sm"><button class="btn blue-hoki">编辑</button><button class="btn blue-hoki">删除</button></div>'
+                    }
                 ],
                 "order": [
                     [1, "asc"]
