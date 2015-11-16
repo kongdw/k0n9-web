@@ -41,12 +41,12 @@ var TableAjax = function () {
                 "pageLength": 10, // default record count per page
                 "ajax": {
                     "type": "get",
-                    "url": WEB_ROOT + "/a/sys/user/list" // ajax source
+                    "url": WEB_ROOT + "/a/sys/user/list" // ajax source,
                 },
                 "columns": [
                     {
-                        "orderable": false,
-                        "data": null,
+                        orderable: false,
+                        data: null,
                         render: function (data, type, row) {
                             return '<input type="checkbox" name="id[]" value="' + row.id + '">';
                         }
@@ -56,17 +56,31 @@ var TableAjax = function () {
                     {"data": "phoneNumber"},
                     {"data": "createDate"},
                     {"data": "status"},
-                    {"data": "deleted"},
-                    {"data": "isAdmin"},
+                    {
+                        orderable: false,
+                        "data": null,
+                        render: function (data, type, row) {
+                            if(row.deleted == true){
+                                return '<input type="checkbox" checked value="' + row.id + '">';
+                            }
+                            return '<input type="checkbox" value="' + row.id + '">';
+                        }
+                    },
+                    {
+                        orderable: false,
+                        "data": null,
+                        render: function (data, type, row) {
+                            if(row.isAdmin == true){
+                                return '<input type="checkbox" checked value="' + row.id + '">';
+                            }
+                            return '<input type="checkbox" value="' + row.id + '">';
+                        }},
                     {
                         "orderable": false,
                         "data": null,
-                        "defaultContent": '<div class="btn-group-sm"><button class="btn blue-hoki">编辑</button><button class="btn blue-hoki">删除</button></div>'
+                        "defaultContent": '<div class="btn-group-sm"><button class="btn blue-hoki fa fa-pencil">编辑</button><button class="btn blue-hoki fa fa-trash-o">删除</button></div>'
                     }
-                ],
-                "order": [
-                    [1, "asc"]
-                ]// set first column as a default sort by asc
+                ]
             }
         });
 

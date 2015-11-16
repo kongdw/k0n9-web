@@ -1,8 +1,10 @@
 package k0n9.module.sys.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import k0n9.common.entity.BaseEntity;
 import k0n9.common.utils.DateUtils;
+import k0n9.common.web.json.DateJsonSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -81,7 +83,7 @@ public class User extends BaseEntity<Long> {
     }
 
     @DateTimeFormat(pattern = DateUtils.DEFAULT_DATE_FORMAT)
-
+    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getCreateDate() {
         return createDate;
     }

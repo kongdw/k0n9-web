@@ -4606,7 +4606,7 @@ Portlets
 /* Basic portlet */
 .portlet {
   margin-top: 0px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   padding: 0px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -4637,7 +4637,7 @@ Portlets
 .portlet > .portlet-title {
   border-bottom: 1px solid #eee;
   padding: 0;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
   min-height: 41px;
   -webkit-border-radius: 4px 4px 0 0;
   -moz-border-radius: 4px 4px 0 0;
@@ -4917,7 +4917,7 @@ Portlets
 
 /* Light Portlet */
 .portlet.light {
-  padding: 12px 20px 15px 20px;
+  padding: 5px 8px 5px 8px;
   background-color: #fff;
 }
 .portlet.light.bordered {
@@ -5014,7 +5014,7 @@ Portlets
   margin-bottom: 0;
 }
 .portlet.light .portlet-body {
-  padding-top: 8px;
+  padding-top: 3px;
 }
 .portlet.light.portlet-fullscreen > .portlet-body {
   padding: 8px 0;

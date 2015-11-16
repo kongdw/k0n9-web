@@ -1,7 +1,7 @@
 package k0n9.module.sys.web;
 
-import com.github.pagehelper.PageInfo;
 import k0n9.common.annotation.ResourceData;
+import k0n9.common.entity.PageEntity;
 import k0n9.common.service.BaseService;
 import k0n9.common.web.BaseController;
 import k0n9.module.sys.entity.User;
@@ -47,7 +47,7 @@ public class UserController extends BaseController<User,Long> {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public PageInfo<User> list(HttpServletRequest request,Model model) {
+    public PageEntity<User> list(HttpServletRequest request,Model model) {
         return super.findByPage(new User(),request);
     }
 

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import k0n9.common.entity.BaseEntity;
+import k0n9.common.entity.PageEntity;
 import k0n9.common.service.BaseService;
 import k0n9.common.web.view.OperationResult;
 import org.apache.commons.lang3.BooleanUtils;
@@ -37,10 +38,10 @@ public abstract class BaseController<T extends BaseEntity<ID>, ID extends Serial
 
     abstract protected T buildBindingEntity();
 
-    protected PageInfo<T> findByPage(T entity,HttpServletRequest request) {
+    protected PageEntity<T> findByPage(T entity,HttpServletRequest request) {
         PageHelper.startPage(1,10);
         List<T> list = getEntityService().findList(entity);
-        return new PageInfo<T>(list);
+        return new  PageEntity<T>(new PageInfo<T>(list));
     }
 
     protected List<T> findList(T entity){

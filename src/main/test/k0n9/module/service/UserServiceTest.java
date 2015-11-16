@@ -18,17 +18,19 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void testInsert() {
-        User user = new User();
-        user.setEmail("kong.dw@hotmail.com");
-        user.setPhoneNumber("13693601808");
-        user.setUsername("David Kong");
-        user.setDeleted(false);
-        user.setCreateDate(new Date());
-        user.setIsAdmin(true);
-        user.setPassword("123456");
-        user.setSalt("111111");
-        user.setStatus("normal");
-        userService.save(user);
+        for(int i =10 ;i<100; i++){
+            User user = new User();
+            user.setEmail("kong.dw"+i+"@hotmail.com");
+            user.setPhoneNumber("136936018"+i);
+            user.setUsername("David Kong"+i);
+            user.setDeleted(false);
+            user.setCreateDate(new Date());
+            user.setIsAdmin(true);
+            user.setPassword("123456");
+            user.setSalt("111111");
+            user.setStatus("normal");
+            userService.save(user);
+        }
     }
     @Test
     public void testUpdate(){

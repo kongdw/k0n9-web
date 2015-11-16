@@ -107,8 +107,8 @@
         </constructor-arg>
     </bean>
     <!-- 初始化数据表结构 -->
-    <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
-        <jdbc:script location="classpath:/k0n9-web.schema.sql"/>
-        <jdbc:script location="classpath:/k0n9-web.data.sql"/>
-    </jdbc:initialize-database>
+    <!--<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">-->
+        <!--<jdbc:script location="classpath:/k0n9-web.schema.sql"/>-->
+        <!--<jdbc:script location="classpath:/k0n9-web.data.sql"/>-->
+    <!--</jdbc:initialize-database>-->
 </beans>

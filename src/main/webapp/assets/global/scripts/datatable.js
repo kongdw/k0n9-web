@@ -39,28 +39,28 @@ var Datatable = function() {
                 filterApplyAction: "filter",
                 filterCancelAction: "filter_cancel",
                 resetGroupActionInputOnSuccess: true,
-                loadingMessage: 'Loading...',
+                loadingMessage: '正在获取数据，请稍后...',
                 dataTable: {
-                    "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>", // datatable layout
+                    "dom": "<'row'<'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>", // datatable layout
                     "pageLength": 10, // default records per page
                     "language": { // language settings
                         // metronic spesific
-                        "metronicGroupActions": "已选择_TOTAL_条",
+                        "metronicGroupActions": "已选择 _TOTAL_ 条",
                         "metronicAjaxRequestGeneralError": "Could not complete request. Please check your internet connection",
-
                         // data tables spesific
-                        "lengthMenu": "<span class='seperator'>|</span>View _MENU_ records",
-                        "info": "<span class='seperator'>|</span>Found total _TOTAL_ records",
-                        "infoEmpty": "No records found to show",
-                        "emptyTable": "No data available in table",
-                        "zeroRecords": "No matching records found",
+                        "lengthMenu": "<span class='seperator'>|</span>每页 _MENU_ 条",
+                        "info": "<span class='seperator'>|</span>从 _START_ 到  _END_ 条，总计 _TOTAL_ 条",
+                        "infoEmpty": "抱歉，没有找到数据!",
+                        "emptyTable": "记录数为0",
+                        "infoFiltered" : "(全部记录数 _MAX_ 条)",
+                        "zeroRecords": "抱歉，没有找到数据!",
                         "paginate": {
-                            "previous": "Prev",
-                            "next": "Next",
-                            "last": "Last",
-                            "first": "First",
-                            "page": "Page",
-                            "pageOf": "of"
+                            "previous": "前一页",
+                            "next": "后一页",
+                            "last": "尾页",
+                            "first": "首页",
+                            "page": "第",
+                            "pageOf": "页,共"
                         }
                     },
 
@@ -74,7 +74,6 @@ var Datatable = function() {
                     "autoWidth": false, // disable fixed width and enable fluid table
                     "processing": false, // enable/disable display message box on record load
                     "serverSide": true, // enable/disable server side ajax loading
-
                     "ajax": { // define ajax settings
                         "url": "", // ajax URL
                         "type": "POST", // request type
@@ -92,21 +91,21 @@ var Datatable = function() {
                             });
                         },
                         "dataSrc": function(res) { // Manipulate the data returned from the server
-                            if (res.customActionMessage) {
-                                Metronic.alert({
-                                    type: (res.customActionStatus == 'OK' ? 'success' : 'danger'),
-                                    icon: (res.customActionStatus == 'OK' ? 'check' : 'warning'),
-                                    message: res.customActionMessage,
-                                    container: tableWrapper,
-                                    place: 'prepend'
-                                });
-                            }
-
-                            if (res.customActionStatus) {
-                                if (tableOptions.resetGroupActionInputOnSuccess) {
-                                    $('.table-group-action-input', tableWrapper).val("");
-                                }
-                            }
+                            //if (res.customActionMessage) {
+                            //    Metronic.alert({
+                            //        type: (res.customActionStatus == 'OK' ? 'success' : 'danger'),
+                            //        icon: (res.customActionStatus == 'OK' ? 'check' : 'warning'),
+                            //        message: res.customActionMessage,
+                            //        container: tableWrapper,
+                            //        place: 'prepend'
+                            //    });
+                            //}
+                            //
+                            //if (res.customActionStatus) {
+                            //    if (tableOptions.resetGroupActionInputOnSuccess) {
+                            //        $('.table-group-action-input', tableWrapper).val("");
+                            //    }
+                            //}
 
                             if ($('.group-checkable', table).size() === 1) {
                                 $('.group-checkable', table).attr("checked", false);
@@ -119,7 +118,7 @@ var Datatable = function() {
 
                             Metronic.unblockUI(tableContainer);
 
-                            return res.list;
+                            return res.data;
                         },
                         "error": function() { // handle general connection errors
                             if (tableOptions.onError) {
