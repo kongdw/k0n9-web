@@ -62,7 +62,7 @@ public class UserController extends BaseController<User, Long> {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    public OperationResult documentEditSave(@ModelAttribute("entity") User entity, Model model) {
+    public OperationResult editSave(@ModelAttribute("entity") User entity, Model model) {
         super.editSave(entity);
         return OperationResult.buildSuccessResult();
     }
