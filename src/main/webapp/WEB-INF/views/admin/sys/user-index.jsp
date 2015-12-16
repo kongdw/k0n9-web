@@ -21,9 +21,10 @@
           <i class="fa fa-shopping-cart"></i>用户列表
         </div>
         <div class="actions">
-          <a href="javascript:;" class="btn default blue-hoki-stripe">
+          <a href="${ctx}/a/sys/user/edit" class="btn default blue-hoki-stripe" data-toggle="modal" data-target="#ajax">
             <i class="fa fa-plus"></i><span class="hidden-480"> 添加用户 </span>
           </a>
+
           <div class="btn-group">
             <a class="btn default blue-hoki-stripe" href="javascript:;" data-toggle="dropdown">
               <i class="fa fa-share"></i>
@@ -54,9 +55,9 @@
         </div>
       </div>
       <div class="portlet-body">
-        <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+        <table class="table table-striped table-bordered table-hover" id="datatable_ajax" data-url="${ctx}/a/sys/user/list">
           <thead>
-          <tr role="row" class="heading">
+          <tr role="row">
             <th width="2%">
               <input type="checkbox" class="group-checkable">
             </th>
@@ -89,18 +90,18 @@
             <td>
             </td>
             <td>
-              <input type="text" class="form-control form-filter input-sm" name="order_id">
+              <input type="text" class="form-control form-filter input-sm" name="search_username">
             </td>
             <td>
-              <input type="text" class="form-control form-filter input-sm" name="order_ship_to">
+              <input type="text" class="form-control form-filter input-sm" name="search_email">
             </td>
             <td>
-              <input type="text" class="form-control form-filter input-sm" name="order_customer_name">
+              <input type="text" class="form-control form-filter input-sm" name="search_phoneNumber">
             </td>
             <td>
               <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
                 <input type="text" class="form-control form-filter input-sm" readonly
-                       name="order_date_from" placeholder="From">
+                       name="search_createDate" placeholder="From">
 											<span class="input-group-btn">
 											<button class="btn btn-sm default" type="button"><i
                           class="fa fa-calendar"></i></button>
@@ -109,19 +110,18 @@
             </td>
             <td>
               <div class="margin-bottom-5">
-                <input type="text" class="form-control form-filter input-sm" name="order_price_from"
-                       placeholder="From"/>
+
               </div>
             </td>
             <td>
-              <select name="deleted" class="form-control form-filter input-sm">
+              <select name="search_deleted" class="form-control form-filter input-sm">
                 <option value="">请选择...</option>
                 <option value="true">是</option>
                 <option value="false">否</option>
               </select>
             </td>
             <td>
-              <select name="isAdmin" class="form-control form-filter input-sm">
+              <select name="search_isAdmin" class="form-control form-filter input-sm">
                 <option value="">请选择...</option>
                 <option value="true">是</option>
                 <option value="false">否</option>
@@ -148,9 +148,102 @@
 </div>
 <!-- END PAGE CONTENT-->
 <script type="text/javascript">
-  $(document).ready(function () {
-    TableAjax.init();
-  });
+    $(document).ready(function () {
+      TableAjax.init("datatable_ajax");
+    });
+  <%--var dataTable_config = {--%>
+    <%--//"bStateSave": true, //是否把获得数据存入cookie--%>
+    <%--//"bLengthChange":false, //关闭每页显示多少条数据--%>
+    <%--"bProcessing": true,--%>
+    <%--"bAutoWidth": false,//自动宽度--%>
+    <%--"bServerSide": true,--%>
+    <%--"sAjaxSource": "<%=request.getContextPath()%>/get2",--%>
+    <%--"fnServerData": retrieveData,--%>
+    <%--"bPaginate": true,  //是否分页。--%>
+    <%--"bFilter": false,--%>
+    <%--"sPaginationType": "full_numbers",      //分页样式--%>
+    <%--"pageLength": 10,--%>
+    <%--"aoColumns": [{--%>
+      <%--"mDataProp": "id",--%>
+    <%--}, {--%>
+      <%--"mDataProp": "rentRuleId"--%>
+    <%--}, {--%>
+      <%--"mDataProp": "ruleName"--%>
+    <%--}, {--%>
+      <%--"mDataProp": "isEnable"--%>
+    <%--}, {--%>
+      <%--"mDataProp": "id"--%>
+    <%--},],--%>
+    <%--"lengthMenu": [--%>
+      <%--[10, 15, 20],--%>
+      <%--[10, 15, 20] // 更改每页显示记录数--%>
+    <%--],--%>
+
+    <%--"language": {--%>
+      <%--"lengthMenu": "  _MENU_ 条数据",--%>
+      <%--"emptyTable": "表格中没有数据~",--%>
+      <%--"info": "显示 _START_ 到 _END_ 条数据 共 _TOTAL_ 条数据",--%>
+      <%--"infoEmpty": "没有数据~",--%>
+      <%--"infoFiltered": "(在 _MAX_ 条数据中查询)",--%>
+      <%--"lengthMenu": "显示 _MENU_ 条数据",--%>
+      <%--"search": "查询:",--%>
+      <%--"zeroRecords": "没有找到对应的数据",--%>
+      <%--"paginate": {--%>
+        <%--"previous": "上一页",--%>
+        <%--"next": "下一页",--%>
+        <%--"last": "末页",--%>
+        <%--"first": "首页"--%>
+      <%--}--%>
+    <%--},--%>
+    <%--"columnDefs": [--%>
+      <%--{--%>
+        <%--sDefaultContent: '',--%>
+        <%--aTargets: ['_all']--%>
+      <%--}--%>
+      <%--, {  // 设置默认值--%>
+        <%--'orderable': false,--%>
+        <%--aTargets: [0],--%>
+      <%--},--%>
+      <%--{--%>
+        <%--aTargets: [0],--%>
+        <%--"render": function (data, type, full, meta) {--%>
+          <%--return '<input type="checkbox" class="group-checkable" data-set="#datatable_ajax .checkboxes"/>';--%>
+        <%--}--%>
+      <%--},--%>
+    <%--],--%>
+    <%--"order": [--%>
+      <%--[1, "asc"]--%>
+    <%--]--%>
+  <%--};--%>
+
+  <%--oTable = $('#datatable_ajax').dataTable(dataTable_config);--%>
+
+  <%--function retrieveData(sSource, aoData, fnCallback) {--%>
+    <%--//查询条件称加入参数数组--%>
+    <%--var rentRuleId = document.getElementById('rentRuleId').value;--%>
+    <%--//alert(rentRuleId);--%>
+    <%--$.ajax({--%>
+      <%--type: "POST",--%>
+      <%--url: sSource,--%>
+      <%--dataType: "json",--%>
+      <%--data: "jsonParam=" + JSON.stringify(aoData) + "&isHistory=0&rentRuleId=" + rentRuleId,--%>
+      <%--success: function (data) {--%>
+        <%--//$("#url_sortdata").val(data.aaData);--%>
+        <%--fnCallback(data); //服务器端返回的对象的returnObject部分是要求的格式--%>
+      <%--}--%>
+    <%--});--%>
+  <%--}--%>
 </script>
+<div class="modal fade" id="ajax" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="${ctx}/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+											<span>
+											&nbsp;&nbsp;Loading... </span>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

@@ -49,10 +49,9 @@
 	
 	<!-- 插件配置 -->
 	<plugins>
-		<plugin interceptor="com.github.pagehelper.PageHelper">
+		<plugin interceptor="k0n9.common.pagination.mybatis.PaginationInterceptor">
             <property name="dialect" value="mysql"/>
-            <property name="pageSizeZero" value="true"/>
-            <property name="reasonable" value="true"/>
+            <property name="stmtIdRegex" value="*.findPage*" />
         </plugin>
     </plugins>
 	

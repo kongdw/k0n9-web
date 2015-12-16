@@ -3,6 +3,7 @@
     <mapping path="/a/password/reset" decorator="/WEB-INF/views/layouts/admin-login.jsp" />
     <mapping path="/a/login" decorator="/WEB-INF/views/layouts/admin-login.jsp" />
 	<mapping path="/a" decorator="/WEB-INF/views/layouts/admin-index.jsp" />
+	<mapping path="/a/**/edit*" decorator="/WEB-INF/views/layouts/body.jsp" />
     <mapping path="/a/*" decorator="/WEB-INF/views/layouts/admin-index.jsp" />
     <mapping path="*" exclue="true" />
 </sitemesh>

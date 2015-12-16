@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+    <!-- 缓存配置 -->
+    <bean class="k0n9.common.ehcache.SharedSpringContextSetter"/>
+    <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache-mybatis.xml"/>
+    </bean>
+    <!--<bean id="springCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">-->
+    <!--<property name="cacheManager" ref="ehcacheManager"/>-->
+    <!--</bean>-->
+    <!-- 不开启Metrics时使用的工厂类 -->
+    <!--<bean id="mybatisCacheDefaultFactory" class="k0n9.common.ehcache.MybatisEhcacheFactory">-->
+        <!--<property name="cacheManager" ref="ehcacheManager"></property>-->
+    <!--</bean>-->
+    <bean id="mybatisCacheDefaultFactory" class="k0n9.common.ehcache.MybatisMetricsEhcacheFactory">
+        <property name="cacheManager" ref="ehcacheManager"/>
+        <property name="registry" ref="metric"/>
+    </bean>
+    <import resource="classpath:/spring-config-metrics.xml"/>
+</beans>

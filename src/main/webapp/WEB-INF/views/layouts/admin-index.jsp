@@ -402,9 +402,9 @@
                     <%--</a>--%>
                 <%--</li>--%>
                 <!-- END ANGULARJS LINK -->
-                <li class="heading">
-                    <h3 class="uppercase">系统</h3>
-                </li>
+                <%--<li class="heading">--%>
+                    <%--<h3 class="uppercase">系统</h3>--%>
+                <%--</li>--%>
                 <li>
                     <a href="javascript:;">
                         <i class="icon-settings"></i>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd"
+       default-lazy-init="false">
+
+    <description>Spring Configuration</description>
+
+    <!-- 加载配置属性文件 -->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:k0n9.properties"/>
+
+    <!-- 加载应用属性实例，可通过  @Value("#{APP_PROP['jdbc.driver']}") String jdbcDriver 方式引用 -->
+    <util:properties id="APP_PROP" location="classpath:k0n9.properties" local-override="true"/>
+
+    <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+    <context:component-scan base-package="k0n9.**.dao,k0n9.**.service" scoped-proxy="targetClass">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <!-- MyBatis begin -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:/mybatis-config.xml"/>
+        <property name="typeAliasesSuperType" value="k0n9.common.entity.BaseEntity"/>
+        <property name="typeAliasesPackage" value="k0n9"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:k0n9/**/entity/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 定义事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <!-- MyBatis end -->
+
+    <!-- 配置 JSR303 Bean Validator 定义 -->
+    <!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
+
+
+    <!-- c3p0 connection pool configuration -->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">-->
+    <!--&lt;!&ndash; 数据库驱动 &ndash;&gt;-->
+    <!--<property name="driverClass" value="${db.driver.class}" />-->
+    <!--&lt;!&ndash; 连接URL串 &ndash;&gt;-->
+    <!--<property name="jdbcUrl" value="${db.url}" />-->
+    <!--&lt;!&ndash; 连接用户名 &ndash;&gt;-->
+    <!--<property name="user" value="${db.username}" />-->
+    <!--&lt;!&ndash; 连接密码 &ndash;&gt;-->
+    <!--<property name="password" value="${db.password}" />-->
+    <!--&lt;!&ndash; 初始化连接池时连接数量为5个 &ndash;&gt;-->
+    <!--<property name="initialPoolSize" value="5" />-->
+    <!--&lt;!&ndash; 允许最小连接数量为5个 &ndash;&gt;-->
+    <!--<property name="minPoolSize" value="5" />-->
+    <!--&lt;!&ndash; 允许最大连接数量为20个 &ndash;&gt;-->
+    <!--<property name="maxPoolSize" value="20" />-->
+    <!--&lt;!&ndash; 允许连接池最大生成100个PreparedStatement对象 &ndash;&gt;-->
+    <!--<property name="maxStatements" value="100" />-->
+    <!--&lt;!&ndash; 连接有效时间，连接超过3600秒未使用，则该连接丢弃 &ndash;&gt;-->
+    <!--<property name="maxIdleTime" value="3600" />-->
+    <!--&lt;!&ndash; 连接用完时，一次产生的新连接步进值为2 &ndash;&gt;-->
+    <!--<property name="acquireIncrement" value="2" />-->
+    <!--&lt;!&ndash; 获取连接失败后再尝试10次，再失败则返回DAOException异常 &ndash;&gt;-->
+    <!--<property name="acquireRetryAttempts" value="10" />-->
+    <!--&lt;!&ndash; 获取下一次连接时最短间隔600毫秒，有助于提高性能 &ndash;&gt;-->
+    <!--<property name="acquireRetryDelay" value="600" />-->
+    <!--&lt;!&ndash; 检查连接的有效性 &ndash;&gt;-->
+    <!--<property name="testConnectionOnCheckin" value="true" />-->
+    <!--&lt;!&ndash; 每个1200秒检查连接对象状态 &ndash;&gt;-->
+    <!--<property name="idleConnectionTestPeriod" value="1200" />-->
+    <!--&lt;!&ndash; 获取新连接的超时时间为1000毫秒 &ndash;&gt;-->
+    <!--<property name="checkoutTimeout" value="1000" />-->
+    <!--</bean>-->
+    <bean id="dataSource" class="org.h2.jdbcx.JdbcConnectionPool" destroy-method="dispose">
+        <constructor-arg>
+            <bean class="org.h2.jdbcx.JdbcDataSource">
+                <!-- 内存模式 -->
+                <!--<property name="URL" value="jdbc:h2:mem:test"/>-->
+                <!-- 文件模式 -->
+                <property name="URL" value="${db.url}" />
+                <property name="user" value="${db.username}"/>
+                <property name="password" value="${db.password}"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <!-- 初始化数据表结构 -->
+    <!--<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">-->
+        <!--<jdbc:script location="classpath:/k0n9-web.schema.sql"/>-->
+        <!--<jdbc:script location="classpath:/k0n9-web.data.sql"/>-->
+    <!--</jdbc:initialize-database>-->
+
+    <import resource="classpath:/spring-config-cache.xml"/>
+</beans>

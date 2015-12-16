@@ -8,13 +8,13 @@ var TableAjax = function () {
             language: 'zh-CN'
         });
     }
-
-    var handleRecords = function () {
-
+    var handleRecords = function (table) {
+        var $table = $("#" + table);
         var grid = new Datatable();
+        var url = $table.attr("data-url");
 
         grid.init({
-            src: $("#datatable_ajax"),
+            src: $table,
             onSuccess: function (grid, response) {
                 // grid:        grid object
                 // response:    json object of server side ajax response
@@ -24,7 +24,7 @@ var TableAjax = function () {
                 // execute some code on network or other general error  
             },
             onDataLoad: function (grid) {
-                // execute some code on ajax data load
+
             },
             loadingMessage: '加载中...',
             dataTable: {
@@ -41,7 +41,8 @@ var TableAjax = function () {
                 "pageLength": 10, // default record count per page
                 "ajax": {
                     "type": "get",
-                    "url": WEB_ROOT + "/a/sys/user/list" // ajax source,
+                    "url": url // ajax source,
+
                 },
                 "columns": [
                     {
@@ -60,7 +61,7 @@ var TableAjax = function () {
                         orderable: false,
                         "data": null,
                         render: function (data, type, row) {
-                            if(row.deleted == true){
+                            if (row.deleted == true) {
                                 return '<input type="checkbox" checked value="' + row.id + '">';
                             }
                             return '<input type="checkbox" value="' + row.id + '">';
@@ -70,11 +71,12 @@ var TableAjax = function () {
                         orderable: false,
                         "data": null,
                         render: function (data, type, row) {
-                            if(row.isAdmin == true){
+                            if (row.isAdmin == true) {
                                 return '<input type="checkbox" checked value="' + row.id + '">';
                             }
                             return '<input type="checkbox" value="' + row.id + '">';
-                        }},
+                        }
+                    },
                     {
                         "orderable": false,
                         "data": null,
@@ -116,9 +118,14 @@ var TableAjax = function () {
 
     return {
         //main function to initiate the module
-        init: function () {
+        initDataTableDefault: function(){
+            $.extend($.fn.dataTable,{
+
+            })
+        },
+        init: function (table) {
             initPickers();
-            handleRecords();
+            handleRecords(table);
         }
     };
 

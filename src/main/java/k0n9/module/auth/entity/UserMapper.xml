@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="k0n9.module.auth.entity.User">
+    <!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+    <cache type="k0n9.common.ehcache.FacadeCache"/>
+    <resultMap id="userResult" type="User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="createDate" column="create_date"/>
+        <result property="status" column="status"/>
+        <result property="deleted" column="deleted"/>
+        <result property="isAdmin" column="is_admin"/>
+        <collection property="roleList" ofType="Role">
+            <id property="id" column="roleList.id"/>
+        </collection>
+        <collection property="organizationList" ofType="Organization">
+            <id property="id" column="organizationList.id"/>
+        </collection>
+    </resultMap>
+
+	<sql id="UserColumns">
+		a.id,
+	    a.username,
+		a.email,
+		a.phone_number,
+		a.create_date,
+		a.status,
+		a.deleted,
+		a.is_admin
+	</sql>
+	
+	<sql id="UserJoins">
+		LEFT JOIN SYS_USER_ROLE r ON r.user_id = a.id
+		LEFT JOIN SYS_USER_ORGANIZATION o ON o.user_id = a.id
+    </sql>
+    
+	<select id="findOne" resultMap="userResult">
+		SELECT
+			<include refid="UserColumns"/>,
+            r.role_id AS  "roleList.id",
+            o.ORGANIZATION_ID as "organizationList.id"
+		FROM sys_User a
+		<include refid="UserJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultMap="userResult">
+		SELECT
+			<include refid="UserColumns"/>,
+          r.role_id AS  "roleList.id",
+          o.ORGANIZATION_ID as "organizationList.id"
+		FROM sys_User a
+		<include refid="UserJoins"/>
+        <where>
+            <if test="username != null">
+                and a.username like '%${username}%'
+            </if>
+            <if test="email != null">
+                and a.email like '%${email}%'
+            </if>
+            <if test="phoneNumber != null">
+                and a.phone_number like '%${phoneNumber}%'
+            </if>
+            <if test="deleted != null">
+                and a.deleted = #{deleted}
+            </if>
+            <if test="isAdmin != null">
+                and a.is_admin = #{isAdmin}
+            </if>
+        </where>
+		ORDER BY a.id
+	</select>
+	
+	<select id="findPage" resultMap="userResult">
+		SELECT
+			<include refid="UserColumns"/>,
+          r.role_id AS  "roleList.id",
+          o.ORGANIZATION_ID AS "organizationList.id"
+		FROM sys_User a
+		<include refid="UserJoins"/>
+        <where>
+            <if test="username != null">
+                and a.username like '%${username}%'
+            </if>
+            <if test="email != null">
+                and a.email like '%${email}%'
+            </if>
+            <if test="phoneNumber != null">
+                and a.phone_number like '%${phoneNumber}%'
+            </if>
+            <if test="deleted != null">
+                and a.deleted = #{deleted}
+            </if>
+            <if test="isAdmin != null">
+                and a.is_admin = #{isAdmin}
+            </if>
+        </where>
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_User(
+		    USERNAME,
+			EMAIL,
+			PHONE_NUMBER,
+			PASSWORD,
+			SALT,
+			CREATE_DATE,
+			STATUS,
+			IS_ADMIN
+		) VALUES (
+		    #{username},
+			#{email},
+			#{phoneNumber},
+			#{password},
+			#{salt},
+			#{createDate},
+			#{status},
+			#{isAdmin}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_User
+		<set>
+            <if test="email!= null">
+                EMAIL = #{email},
+            </if>
+            <if test="phoneNumber!= null">
+                PHONE_NUMBER = #{phoneNumber},
+            </if>
+            <if test="createDate!= null">
+                CREATE_DATE = #{createDate},
+            </if>
+            <if test="status!= null">
+                STATUS = #{status},
+            </if>
+            <if test="isAdmin!= null">
+                IS_ADMIN = #{isAdmin},
+            </if>
+            <if test="deleted!= null">
+                DELETED = #{deleted}
+            </if>
+        </set>
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+        UPDATE sys_User set DELETED = TRUE
+        WHERE id IN
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

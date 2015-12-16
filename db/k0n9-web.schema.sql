@@ -79,30 +79,19 @@ CREATE INDEX idx_sys_organization_type on sys_organization (type);
 CREATE INDEX idx_sys_organization_parent_id on sys_organization (parent_id);
 CREATE INDEX idx_sys_organization_parent_ids_weight on sys_organization (parent_ids,weight);
 
-
-DROP TABLE IF EXISTS sys_job;
-CREATE TABLE sys_job (
-  id         BIGINT NOT NULL AUTO_INCREMENT,
-  name       VARCHAR(100) DEFAULT NULL,
-  parent_id  BIGINT       DEFAULT NULL,
-  parent_ids VARCHAR(200) DEFAULT '',
-  icon       VARCHAR(200) DEFAULT NULL,
-  weight     INT(11)      DEFAULT NULL,
-  is_show    BOOLEAN      DEFAULT NULL,
-  CONSTRAINT PK_SYS_JOB PRIMARY KEY (id)
+DROP TABLE IF EXISTS sys_user_role;
+CREATE TABLE sys_user_role(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  user_id BIGINT NOT NULL,
+  role_id BIGINT NOT NULL,
+  CONSTRAINT pk_sys_user_role PRIMARY KEY (id)
 );
-
-CREATE INDEX idx_sys_job_name on sys_job (name);
-CREATE INDEX idx_sys_job_parent_id on sys_job (parent_id);
-CREATE INDEX idx_sys_job_parent_ids_weight on sys_job (parent_ids,weight);
-
-
-DROP TABLE IF EXISTS sys_user_organization_job;
-CREATE TABLE sys_user_organization_job (
-  id              BIGINT NOT NULL AUTO_INCREMENT,
-  user_id         BIGINT DEFAULT NULL,
-  organization_id BIGINT DEFAULT NULL,
-  job_id          BIGINT DEFAULT NULL,
-  CONSTRAINT PK_sys_user_organization_job PRIMARY KEY (id)
+create UNIQUE INDEX uidx_sys_user_role on sys_user_role(user_id, role_id);
+DROP TABLE IF EXISTS SYS_USER_ORGANIZATION;
+CREATE TABLE sys_user_organization(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  user_id BIGINT NOT NULL ,
+  organization_id BIGINT NOT NULL,
+  CONSTRAINT pk_sys_user_organization PRIMARY KEY (id)
 );
-CREATE UNIQUE INDEX uidx_sys_user_organization_job on sys_user_organization_job (user_id,organization_id,job_id);
+create UNIQUE INDEX uidx_sys_user_organization on sys_user_organization(user_id, organization_id);
